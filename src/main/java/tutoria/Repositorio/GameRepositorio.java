@@ -9,32 +9,32 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import tutoria.Interface.InterfaceFinca;
-import tutoria.Modelo.Finca;
+import tutoria.Modelo.Game;
+import tutoria.Interface.InterfaceGame;
 
 /**
  *
  * @author USUARIO
  */
 @Repository
-public class FincaRepositorio {
+public class GameRepositorio {
       @Autowired
-    private InterfaceFinca crud;
+    private InterfaceGame crud;
     
 
-    public List<Finca> getAll(){
-        return (List<Finca>) crud.findAll();       
+    public List<Game> getAll(){
+        return (List<Game>) crud.findAll();       
     }
     
-    public Optional <Finca> getFinca(int id){
+    public Optional <Game> getGame(int id){
         return crud.findById(id);
     }
     
-    public Finca save(Finca finca){
-        return crud.save(finca);
+    public Game save(Game game){
+        return crud.save(game);
     }
-     public void delete(Finca finca){
-        crud.delete(finca);
+     public void delete(Game game){
+        crud.delete(game);
     }
     
 }

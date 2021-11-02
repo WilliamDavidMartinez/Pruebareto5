@@ -4,8 +4,8 @@
  */
 package tutoria.Web;
 
-import tutoria.Modelo.Finca;
-import tutoria.Servicios.ServiciosFinca;
+import tutoria.Modelo.Game;
+import tutoria.Servicios.ServiciosGame;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,41 +27,41 @@ import org.springframework.web.bind.annotation.RestController;
  * @author USUARIO
  */
 @RestController
-@RequestMapping("/api/Farm")
+@RequestMapping("/api/Game")
 @CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT,RequestMethod.DELETE})
-public class FincaWeb {
+public class GameWeb {
      @GetMapping("/holaMundo")
     public String saludad(){
     return "Hola Mundo Tutoria";
     }
 
     @Autowired
-    private ServiciosFinca servicio;
+    private ServiciosGame servicio;
     @GetMapping("all")
-    public List <Finca> getFinca(){
+    public List <Game> getGame(){
         return servicio.getAll();
     }
     
     @GetMapping("/{id}")
-    public Optional<Finca> getOrthesis(@PathVariable("id") int idFinca) {
-        return servicio.getFinca(idFinca);
+    public Optional<Game> getOrthesis(@PathVariable("id") int idGame) {
+        return servicio.getGame(idGame);
     }
 
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
-    public Finca save(@RequestBody Finca finca) {
-        return servicio.save(finca);
+    public Game save(@RequestBody Game game) {
+        return servicio.save(game);
     }
     
      @PutMapping("/update")
     @ResponseStatus(HttpStatus.CREATED)
-    public Finca update(@RequestBody Finca finca) {
-        return servicio.update(finca);
+    public Game update(@RequestBody Game game) {
+        return servicio.update(game);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public boolean delete(@PathVariable("id") int fincaId) {
-        return servicio.deleteFinca(fincaId);
+    public boolean delete(@PathVariable("id") int gameId) {
+        return servicio.deleteGame(gameId);
     }
 }

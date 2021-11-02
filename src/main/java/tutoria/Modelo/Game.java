@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,27 +23,30 @@ import javax.persistence.Table;
  * @author USUARIO
  */
 @Entity
-@Table(name = "farm")
-public class Finca implements Serializable {
+@Table(name = "game")
+public class Game implements Serializable {
        @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String name; 
-    private String address;
-    private Integer  extension; 
+    @Column(length=45)
+    private String name;
+    @Column(length=45)
+    private String developer;
+    private Integer year;
+    @Column(length=250)
     private String description;
     
     @ManyToOne
     @JoinColumn(name="categoryid")
-    @JsonIgnoreProperties("farms")
+    @JsonIgnoreProperties("games")
     private Categoria category;
     
-    @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "farm")
-    @JsonIgnoreProperties({"farm","client"})
+    @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "game")
+    @JsonIgnoreProperties({"game","client"})
     private List<Mensaje> messages;
 
-    @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "farm")
-    @JsonIgnoreProperties({"farm","message"})
+    @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "game")
+    @JsonIgnoreProperties({"game","message"})
     public List<Reservacion> reservations;
 
     public Integer getId() {
@@ -61,20 +65,20 @@ public class Finca implements Serializable {
         this.name = name;
     }
 
-    public String getAddress() {
-        return address;
+     public String getDeveloper() {
+        return developer;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setDeveloper(String developer) {
+        this.developer = developer;
     }
 
-    public Integer getExtension() {
-        return extension;
+    public Integer getYear() {
+        return year;
     }
 
-    public void setExtension(Integer extension) {
-        this.extension = extension;
+    public void setYear(Integer year) {
+        this.year = year;
     }
 
     public String getDescription() {
